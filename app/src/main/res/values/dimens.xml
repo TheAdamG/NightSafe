@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="help_dim">190dp</dimen>
+    <dimen name="night_menu_dim">120dp</dimen>
+</resources>
