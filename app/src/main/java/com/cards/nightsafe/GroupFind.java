@@ -1,15 +1,16 @@
 package com.cards.nightsafe;
 
+import java.sql.Date;
+
 public class GroupFind {
 
   private String name;
-  //??? check types
   private double latitude;
   private double longitude;
   private int batteryPercentage;
   private String lastSeenTime;
 
-  public GroupFind(String name, double latitude, double longitude, int batteryPercentage, String lastSeenTime) {
+  public GroupFind(String name, float latitude, float longitude, int batteryPercentage, String lastSeenTime) {
     this.name = name;
     this.latitude = latitude;
     this.longitude = longitude;

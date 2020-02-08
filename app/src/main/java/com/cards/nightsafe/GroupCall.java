@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class GroupCall {
 
-    private boolean emergencyContact;
     private String name;
     private String phoneNumber;
 
 
-    public GroupCall(boolean emergencyContact, String name, String phoneNumber) {
-        this.emergencyContact = emergencyContact;
+    public GroupCall(String name, String phoneNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
@@ -18,9 +16,14 @@ public class GroupCall {
     private ArrayList<GroupCall> makeGroupCall() {
         ArrayList<GroupCall> list = new ArrayList<>();
 
-        list.add(new GroupCall(false, "False", "07738016783"));
-        list.add(new GroupCall(true, "mum", "07000000000"));
+        list.add(new GroupCall("False", "07738016783"));
+        list.add(new GroupCall("mum", "07000000000"));
         return list;
+    }
+
+    @Override
+    public String toString() {
+        return (name+" "+ phoneNumber);
     }
 
 }

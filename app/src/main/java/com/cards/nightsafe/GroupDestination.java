@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class GroupDestination {
 
-  private ArrayList<String> usernames;
+  private ArrayList<Integer> usernames;
   private String destination;
 
 
-  public GroupDestination(ArrayList<String> usernames, String destination) {
+  public GroupDestination(ArrayList<Integer> usernames, String destination) {
     this.usernames = usernames;
     this.destination = destination;
   }
