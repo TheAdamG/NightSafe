@@ -44,7 +44,7 @@ public class Queries {
     }
   }*/
 
-  /*public static ArrayList<String> FriendNamesQuery(int username) {
+  public static ArrayList<String> FriendNamesQuery(int username) {
     ArrayList<String> friends = new ArrayList<>();
     try {
       String myDriver = "com.mysql.jdbc.Driver";
@@ -77,7 +77,7 @@ public class Queries {
     finally {
       return friends;
     }
-  }*/
+  }
 
   public static void EventAddQuery(String name, String location, String date, String home, String timeHome, ArrayList<Integer> groupMembers) {
     try {
@@ -215,7 +215,7 @@ public class Queries {
           String firstName = rs.getString("firstName");
           String lastName = rs.getString("lastName");
           float latitude = rs.getFloat("lat");
-          float longitude = rs.getFloat("long");
+          float longitude = rs.getFloat("lng");
           int batteryPercentage = rs.getInt("bat");
           String lastSeenTime = rs.getString("last_seen");
           String name = firstName.concat(" ").concat(lastName);
