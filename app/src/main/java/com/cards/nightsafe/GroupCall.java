@@ -13,7 +13,7 @@ public class GroupCall {
         this.phoneNumber = phoneNumber;
     }
 
-    private ArrayList<GroupCall> makeGroupCall() {
+    public static ArrayList<GroupCall> makeGroupCall() {
         ArrayList<GroupCall> list = new ArrayList<>();
 
         list.add(new GroupCall("False", "07738016783"));
@@ -26,4 +26,19 @@ public class GroupCall {
         return (name+" "+ phoneNumber);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }
