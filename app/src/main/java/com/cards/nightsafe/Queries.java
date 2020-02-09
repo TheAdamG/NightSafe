@@ -54,19 +54,25 @@ public class Queries {
       Statement st = conn.createStatement();
       String query = String.format("SELECT * from friendships JOIN users on users.username = friendships.user2 where user1=\""+username+"\";");
       ResultSet rs = st.executeQuery(query);
-      while ((rs.next())&&(rs.getString("status").equals("Friends"))) {
+      while (rs.next()) {
         String firstName = rs.getString("firstName");
         String lastName = rs.getString("lastName");
+        String status = rs.getString("status");
         String name = firstName.concat(" ").concat(lastName);
-        friends.add(name);
+        if (status.equals("Friends")) {
+          friends.add(name);
+        }
       }
       query = String.format("SELECT * from friendships JOIN users on users.username = friendships.user1 where user2=\""+username+"\";");
       rs = st.executeQuery(query);
-      while ((rs.next())&&(rs.getString("status").equals("Friends"))) {
+      while (rs.next()) {
         String firstName = rs.getString("firstName");
         String lastName = rs.getString("lastName");
+        String status = rs.getString("status");
         String name = firstName.concat(" ").concat(lastName);
-        friends.add(name);
+        if (status.equals("Friends")) {
+          friends.add(name);
+        }
       }
       friends.stream().distinct().collect(Collectors.toList());
       st.close();
@@ -176,18 +182,20 @@ public class Queries {
   public static GroupDestination GroupDestinationQuery(int groupID) {
     ArrayList<Integer> usernameList = new ArrayList<>();
     String destination = "";
+    String eventLocation = "";
     try {
       String myDriver = "com.mysql.jdbc.Driver";
       String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
-      String query = "SELECT username, dest from group_user JOIN groups on group_user.group_id = groups.group_id where group_user.group_id = " + groupID + ";";
+      String query = "SELECT username, dest, location from group_user JOIN groups on group_user.group_id = groups.group_id JOIN event on groups.event_id = event.event_id where group_user.group_id = " + groupID + ";";
       ResultSet rs = st.executeQuery(query);
       while (rs.next()) {
         // check if column names correct!
         usernameList.add(rs.getInt("username"));
         destination = rs.getString("dest");
+        eventLocation = rs.getString("location");
       }
 
       st.close();
@@ -196,7 +204,7 @@ public class Queries {
       System.err.println(e.getMessage());
     }
     finally {
-      return (new GroupDestination(usernameList, destination));
+      return (new GroupDestination(usernameList, destination, eventLocation));
     }
   }
 
