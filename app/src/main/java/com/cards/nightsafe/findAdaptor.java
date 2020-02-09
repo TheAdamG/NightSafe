@@ -8,9 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -69,6 +73,10 @@ public class findAdaptor extends androidx.recyclerview.widget.RecyclerView.Adapt
             vh.batteryImage.setImageResource(R.drawable.hundred);
         }
 
+        LatLng latLng = new LatLng(group.getLatitude(), group.getLongitude());
+        vh.friendButton.setTag(latLng);
+
+
     }
 
 
@@ -86,6 +94,7 @@ public class findAdaptor extends androidx.recyclerview.widget.RecyclerView.Adapt
         public final TextView findName;
         public final TextView findLastSeen;
         public final ImageView batteryImage;
+        public final LinearLayout friendButton;
 
         public ViewHolder(View view) {
             super(view);
@@ -93,6 +102,7 @@ public class findAdaptor extends androidx.recyclerview.widget.RecyclerView.Adapt
             findName = view.findViewById(R.id.findName);
             findLastSeen = view.findViewById(R.id.findLastSeen);
             batteryImage = view.findViewById(R.id.batteryImage);
+            friendButton = view.findViewById(R.id.friendButton);
 
         }
     }

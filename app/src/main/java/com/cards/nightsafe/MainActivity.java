@@ -25,7 +25,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static int username = 1;
+    public static int username = 3;
 
     int batteryPercent;
     String lastSeen;
@@ -68,11 +68,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchEmergency(View view) {
-        Intent intent = new Intent("android.intent.action.MAIN");
-        intent.setComponent(ComponentName.unflattenFromString("com.android.phone/.EmergencyDialer"));
-        intent.setData(Uri.parse("tel:999"));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:999"));
+        startActivity(callIntent);
     }
 
 

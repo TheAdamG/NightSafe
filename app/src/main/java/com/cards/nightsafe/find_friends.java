@@ -217,6 +217,13 @@ public class find_friends extends AppCompatActivity
 
     }
 
+    public void makeMarker(View view) {
+        mMap.clear();
+        LatLng latLng = (LatLng) view.getTag();
+        mMap.addMarker(new MarkerOptions().position(latLng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+    }
+
     /**
      * Gets the current location of the device, and positions the map's camera.
      */
