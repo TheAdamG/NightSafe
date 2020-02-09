@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Queries {
 
-  /*public static boolean AreWeFriendsQuery(int username) {
+  public static boolean AreWeFriendsQuery(int username) {
     ArrayList<String> friends = null;
     try {
       String myDriver = "com.mysql.jdbc.Driver";
@@ -42,7 +42,7 @@ public class Queries {
     finally {
       return !(friends.equals(null));
     }
-  }*/
+  }
 
   public static ArrayList<String> FriendNamesQuery(int username) {
     ArrayList<String> friends = new ArrayList<>();
