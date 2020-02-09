@@ -33,7 +33,7 @@ public class Queries {
         String name = firstName.concat(" ").concat(lastName);
         friends.add(name);
       }
-      friendIDs.stream().distinct().collect(Collectors.toList());
+      friends.stream().distinct().collect(Collectors.toList());
       st.close();
     } catch (Exception e) {
       System.err.println("AreWeFriendsQuery error retrieving user data: ");
