@@ -1,5 +1,6 @@
 package com.cards.nightsafe;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,6 +9,33 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Queries {
+
+  public static EmergencyContacts EmergencyContactsQuery(int username) {
+    try {
+      String myDriver = "com.mysql.jdbc.Driver";
+      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
+      Class.forName(myDriver);
+      Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
+      Statement st = conn.createStatement();
+      String query = "SELECT * from users where username = \"" + username + "\";";
+      ResultSet rs = st.executeQuery(query);
+      while (rs.next()) {
+        String eno = rs.getString("emergencyNameOne");
+        String ent = rs.getString("emergencyNameTwo");
+        String epo = rs.getString("emergencyPhoneNumberOne");
+        String ept = rs.getString("emergencyPhoneNumberTwo");
+        EmergencyContacts ecs = new EmergencyContacts(eno, ent, epo, ept);
+        return ecs;
+      }
+      st.close();
+    } catch (Exception e) {
+      System.err.println("GroupFindQuery error retrieving user data: ");
+      System.err.println(e.getMessage());
+    }
+    finally {
+      return null;
+    }
+  }
 
   public static boolean AreWeFriendsQuery(int username, int friend) {
     try {
@@ -153,7 +181,7 @@ public class Queries {
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
-      String query = "SELECT * from group_user JOIN users on group_user.username = users.username where group_user.group_id = " + groupID + ";";
+      String query = "SELECT * from group_user JOIN users on group_user.username = users.username where group_user.group_id = \"" + groupID + "\";";
       ResultSet rs = st.executeQuery(query);
       while (rs.next()) {
         // check if column names correct!
@@ -212,7 +240,7 @@ public class Queries {
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
-      String query = "SELECT * from group_user JOIN users on group_user.username = users.username where group_id = " + groupID + ";";
+      String query = "SELECT * from group_user JOIN users on group_user.username = users.username where group_id = \"" + groupID + "\";";
       ResultSet rs = st.executeQuery(query);
       while (rs.next()) {
         if (rs.getInt("username")!=username) {
