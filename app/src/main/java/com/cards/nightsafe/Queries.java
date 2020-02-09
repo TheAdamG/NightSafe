@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Queries {
 
-  public static void ChangePercentageQuery(int username, int bat) {
+  public static void ChangeStatusQuery(int username, int bat, String lastSeen) {
     try {
       String myDriver = "com.mysql.jdbc.Driver";
       String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
@@ -19,8 +19,10 @@ public class Queries {
       Statement st = conn.createStatement();
       String setBat = "UPDATE group_user SET bat = \"" + bat + "\" WHERE username = \"" + username + "\";";
       st.executeUpdate(setBat);
+      String setSeen = "UPDATE group_user SET last_seen = \"" + lastSeen + "\" WHERE username = \"" + username + "\";";
+      st.executeUpdate(setSeen);
     } catch (Exception e) {
-      System.err.println("ChangePercentageQuery error adding user data: ");
+      System.err.println("ChangeStatusQuery error adding user data: ");
       System.err.println(e.getMessage());
     }
   }
