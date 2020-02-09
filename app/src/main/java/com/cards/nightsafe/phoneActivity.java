@@ -4,31 +4,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+
+import java.sql.*;
 
 import java.util.ArrayList;
 
 public class phoneActivity extends AppCompatActivity {
 
-    private RecyclerView calls;
+
     private RecyclerView.Adapter adapter;
+    ArrayList<GroupCall> callsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
 
-        ArrayList<GroupCall> calls = GroupCall.makeGroupCall();
 
-        this.calls = (RecyclerView) findViewById(R.id.calls);
-        RecyclerView.LayoutManager mLayourManager = new LinearLayoutManager(this);
-        this.calls.setLayoutManager(mLayourManager);
+        new Download(phoneActivity.this).execute();
+        //ArrayList<GroupCall> calls = GroupCall.makeGroupCall();
 
-        adapter = new phoneAdaptor(calls);
-        this.calls.setAdapter(adapter);
+
+
+
     }
 
 
@@ -38,5 +42,43 @@ public class phoneActivity extends AppCompatActivity {
         callIntent.setData(Uri.parse("tel:" + phoneNumber));
         startActivity(callIntent);
     }
+
+
+    public class Download extends AsyncTask<Void, Void, String> {
+
+        Context context;
+        private RecyclerView calls;
+
+        public Download(Context context) {
+            this.context = context;
+        }
+
+        protected void onPreExecute() {
+
+        }
+
+        protected String doInBackground(Void... params) {
+            callsList = Queries.GroupCallQuery(3, 10);
+            return "Complete";
+        }
+
+        protected void onPostExecute(String result) {
+            if (result.equals("Complete")) {
+                this.calls = (RecyclerView) findViewById(R.id.calls);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+                this.calls.setLayoutManager(mLayoutManager);
+
+                adapter = new phoneAdaptor(callsList);
+                this.calls.setAdapter(adapter);
+            }
+        }
+
+
+
+
+
+    }
+
+
 
 }
