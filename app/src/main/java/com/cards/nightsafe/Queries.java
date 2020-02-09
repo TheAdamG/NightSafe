@@ -10,6 +10,21 @@ import java.util.stream.Collectors;
 
 public class Queries {
 
+  public static void ChangePercentageQuery(int username, int bat) {
+    try {
+      String myDriver = "com.mysql.jdbc.Driver";
+      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
+      Class.forName(myDriver);
+      Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
+      Statement st = conn.createStatement();
+      String setBat = "UPDATE group_user SET bat = \"" + bat + "\" WHERE username = \"" + username + "\";";
+      st.executeUpdate(setBat);
+    } catch (Exception e) {
+      System.err.println("ChangePercentageQuery error adding user data: ");
+      System.err.println(e.getMessage());
+    }
+  }
+
   public static EmergencyContacts EmergencyContactsQuery(int username) {
     try {
       String myDriver = "com.mysql.jdbc.Driver";
@@ -29,7 +44,7 @@ public class Queries {
       }
       st.close();
     } catch (Exception e) {
-      System.err.println("GroupFindQuery error retrieving user data: ");
+      System.err.println("EmergencyContactsQuery error retrieving user data: ");
       System.err.println(e.getMessage());
     }
     finally {
