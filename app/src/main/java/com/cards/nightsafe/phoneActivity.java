@@ -61,7 +61,7 @@ public class phoneActivity extends AppCompatActivity {
         }
 
         protected String doInBackground(Void... params) {
-            callsList = Queries.GroupCallQuery(3, 10);
+            callsList = Queries.GroupCallQuery(MainActivity.username, 10);
             return "Complete";
         }
 

@@ -25,6 +25,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static int username = 1;
+
     int batteryPercent;
     String lastSeen;
 
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         protected String doInBackground(Void... params) {
-             Queries.ChangeStatusQuery(3, batteryPercent, lastSeen );
+             Queries.ChangeStatusQuery(MainActivity.username, batteryPercent, lastSeen );
             return "Complete";
         }
 

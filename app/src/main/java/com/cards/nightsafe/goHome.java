@@ -116,7 +116,7 @@ public class goHome extends AppCompatActivity {
                 transportDurationText = directionRequest.getDuration();
 
                 uberRequest = new DirectionRequest(origin, destination, true);
-                uberDurationText = uberRequest.getDuration() + " Drive";
+                uberDurationText = uberRequest.getDuration();
                 uberCoords = uberRequest.getUberPickup();
 
             } catch (IOException e) {

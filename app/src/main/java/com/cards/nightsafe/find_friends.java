@@ -449,7 +449,7 @@ public class find_friends extends AppCompatActivity
         }
 
         protected String doInBackground(Void... params) {
-            groupList = Queries.GroupFindQuery(3, 10);
+            groupList = Queries.GroupFindQuery(MainActivity.username, 10);
             return "Complete";
         }
 
