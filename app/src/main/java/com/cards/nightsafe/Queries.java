@@ -9,39 +9,35 @@ import java.util.stream.Collectors;
 
 public class Queries {
 
-  public static boolean AreWeFriendsQuery(int username) {
-    ArrayList<String> friends = null;
+  public static boolean AreWeFriendsQuery(int username, int friend) {
     try {
       String myDriver = "com.mysql.jdbc.Driver";
       String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
-      String query = String.format("SELECT * from friendships JOIN users on users.username = friendships.user2 where user1=\""+username+"\";");
+      String query = String.format("SELECT * from friendships JOIN users on users.username = friendships.user2 where user1=\""+username+"\" AND user2=\""+friend+"\";");
       ResultSet rs = st.executeQuery(query);
-      while ((rs.next())&&(rs.getString("status").equals("Friends"))) {
-        String firstName = rs.getString("firstName");
-        String lastName = rs.getString("lastName");
-        String name = firstName.concat(" ").concat(lastName);
-        friends.add(name);
+      while (rs.next()) {
+        String status = rs.getString("status");
+        if (status.equals("Friends")) {
+          return true;
+        }
       }
-      query = String.format("SELECT * from friendships JOIN users on users.username = friendships.user1 where user2=\""+username+"\";");
+      query = String.format("SELECT * from friendships JOIN users on users.username = friendships.user1 where user2=\""+username+"\" AND user2=\""+friend+"\";");
       rs = st.executeQuery(query);
-      while ((rs.next())&&(rs.getString("status").equals("Friends"))) {
-        String firstName = rs.getString("firstName");
-        String lastName = rs.getString("lastName");
-        String name = firstName.concat(" ").concat(lastName);
-        friends.add(name);
+      while (rs.next()) {
+        String status = rs.getString("status");
+        if (status.equals("Friends")) {
+          return true;
+        }
       }
-      friends.stream().distinct().collect(Collectors.toList());
       st.close();
     } catch (Exception e) {
       System.err.println("AreWeFriendsQuery error retrieving user data: ");
       System.err.println(e.getMessage());
     }
-    finally {
-      return !(friends.equals(null));
-    }
+    return false;
   }
 
   public static ArrayList<String> FriendNamesQuery(int username) {
