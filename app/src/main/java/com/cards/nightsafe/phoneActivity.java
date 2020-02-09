@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.BatteryManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import java.sql.*;
@@ -26,7 +29,6 @@ public class phoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
 
-
         new Download(phoneActivity.this).execute();
         //ArrayList<GroupCall> calls = GroupCall.makeGroupCall();
 
@@ -34,6 +36,7 @@ public class phoneActivity extends AppCompatActivity {
 
 
     }
+
 
 
     public void testCall (View view) {
@@ -44,7 +47,7 @@ public class phoneActivity extends AppCompatActivity {
     }
 
 
-    public class Download extends AsyncTask<Void, Void, String> {
+    private class Download extends AsyncTask<Void, Void, String> {
 
         Context context;
         private RecyclerView calls;

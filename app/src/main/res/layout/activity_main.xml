@@ -11,51 +11,55 @@
         android:id="@+id/help_button"
         android:layout_width="@dimen/help_dim"
         android:layout_height="@dimen/help_dim"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/round_button_help"
         android:text="@string/help"
         android:textColor="@color/colorWhite"
-        android:textSize="36sp"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/homeButton"
+        android:layout_width="@dimen/night_menu_dim"
+        android:layout_height="@dimen/night_menu_dim"
+        android:layout_marginTop="244dp"
+        android:background="@drawable/round_button_menu"
+        android:onClick="launchGoHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/help_button"
+        app:srcCompat="@drawable/house_compress_2" />
+
+    <ImageButton
+        android:id="@+id/groupButton"
+        android:layout_width="@dimen/night_menu_dim"
+        android:layout_height="@dimen/night_menu_dim"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round_button_menu"
+        android:onClick="launchFind"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.902"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/help_button"
+        app:srcCompat="@drawable/location_compress_2" />
 
     <ImageButton
         android:id="@+id/phoneButton"
         android:layout_width="@dimen/night_menu_dim"
         android:layout_height="@dimen/night_menu_dim"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/round_button_menu"
         android:onClick="launchPhone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/help_button"
-        app:srcCompat="@android:drawable/btn_star" />
+        app:srcCompat="@drawable/final_phone" />
 
-    <ImageButton
-        android:id="@+id/homeButton"
-        android:layout_width="@dimen/night_menu_dim"
-        android:layout_height="@dimen/night_menu_dim"
-        android:layout_marginTop="304dp"
-        android:background="@drawable/round_button_menu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/help_button"
-        app:srcCompat="@android:drawable/btn_star" />
-
-    <ImageButton
-        android:id="@+id/groupButton"
-        android:layout_width="@dimen/night_menu_dim"
-        android:layout_height="@dimen/night_menu_dim"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/round_button_menu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/help_button"
-        app:srcCompat="@android:drawable/btn_star" />
 </androidx.constraintlayout.widget.ConstraintLayout>

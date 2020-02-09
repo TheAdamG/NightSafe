@@ -4,11 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation = "vertical"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
     tools:context=".phoneActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Group Contacts"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calls"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/colorAlmostBlack">
+
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

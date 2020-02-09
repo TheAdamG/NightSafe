@@ -1,2 +1,2 @@
-include ':app', ':mysql-connector'
+include ':app', ':mysql-connector', ':json-20190722'
 rootProject.name='NightSafe'
