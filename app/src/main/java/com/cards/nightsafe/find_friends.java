@@ -32,12 +32,14 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -220,7 +222,8 @@ public class find_friends extends AppCompatActivity
     public void makeMarker(View view) {
         mMap.clear();
         LatLng latLng = (LatLng) view.getTag();
-        mMap.addMarker(new MarkerOptions().position(latLng));
+        MarkerOptions marker = new MarkerOptions().position(latLng);
+        mMap.addMarker(marker);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 

@@ -1,6 +1,5 @@
 package com.cards.nightsafe;
 
-import java.sql.Date;
 
 public class EventInfo {
 
