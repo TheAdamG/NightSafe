@@ -10,10 +10,11 @@ import java.util.stream.Collectors;
 
 public class Queries {
 
+  private static final String myDriver = "com.mysql.jdbc.Driver";
+  private static final String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe"
+
   public static void ChangeStatusQuery(int username, int bat, String lastSeen) {
     try {
-      String myDriver = "com.mysql.jdbc.Driver";
-      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
@@ -29,8 +30,6 @@ public class Queries {
 
   public static EmergencyContacts EmergencyContactsQuery(int username) {
     try {
-      String myDriver = "com.mysql.jdbc.Driver";
-      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
@@ -56,8 +55,6 @@ public class Queries {
 
   public static boolean AreWeFriendsQuery(int username, int friend) {
     try {
-      String myDriver = "com.mysql.jdbc.Driver";
-      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
@@ -88,8 +85,6 @@ public class Queries {
   public static ArrayList<String> FriendNamesQuery(int username) {
     ArrayList<String> friends = new ArrayList<>();
     try {
-      String myDriver = "com.mysql.jdbc.Driver";
-      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
@@ -128,8 +123,6 @@ public class Queries {
 
   public static void EventAddQuery(String name, String location, String date, String home, String timeHome, ArrayList<Integer> groupMembers) {
     try {
-      String myDriver = "com.mysql.jdbc.Driver";
-      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
@@ -166,8 +159,6 @@ public class Queries {
   public static EventInfo EventInfoQuery(int eventID) {
     EventInfo eventInfo = null;
     try {
-      String myDriver = "com.mysql.jdbc.Driver";
-      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
@@ -193,8 +184,6 @@ public class Queries {
   public static ArrayList<GroupCall> GroupCallQuery(int username, int groupID) {
     ArrayList<GroupCall> userCallList = new ArrayList<>();
     try {
-      String myDriver = "com.mysql.jdbc.Driver";
-      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
@@ -225,8 +214,6 @@ public class Queries {
     String destination = "";
     String eventLocation = "";
     try {
-      String myDriver = "com.mysql.jdbc.Driver";
-      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
@@ -252,8 +239,6 @@ public class Queries {
   public static ArrayList<GroupFind> GroupFindQuery(int username, int groupID) {
     ArrayList<GroupFind> userFindList = new ArrayList<>();
     try {
-      String myDriver = "com.mysql.jdbc.Driver";
-      String myUrl = "jdbc:mysql://raspberrypi:3306/nightsafe";
       Class.forName(myDriver);
       Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
       Statement st = conn.createStatement();
