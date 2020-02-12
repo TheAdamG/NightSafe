@@ -6,15 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.BatteryManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
-import java.sql.*;
 
 import java.util.ArrayList;
 
@@ -65,6 +60,8 @@ public class phoneActivity extends AppCompatActivity {
             return "Complete";
         }
 
+        // Once the query is complete, we set the Recycler view content  to display the names with
+        // The call button and the respective phone number tagged to the button
         protected void onPostExecute(String result) {
             if (result.equals("Complete")) {
                 this.calls = (RecyclerView) findViewById(R.id.calls);

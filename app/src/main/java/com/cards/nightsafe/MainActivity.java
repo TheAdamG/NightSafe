@@ -1,10 +1,6 @@
 package com.cards.nightsafe;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -31,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Set the help button to be held down
         findViewById(R.id.help_button).setOnLongClickListener(new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
@@ -39,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         }});
 
 
+        // Send the time and battery percentage to the database
         Calendar currentTime = Calendar.getInstance();
         DateFormat sdf = new SimpleDateFormat("hh:mm");
         lastSeen = sdf.format(currentTime.getTime());
@@ -89,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
     private class Upload extends AsyncTask<Void, Void, String> {
 
         Context context;
-        private RecyclerView calls;
 
         public Upload(Context context) {
             this.context = context;
@@ -99,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        // Calls the query to upload battery percentage and the last seen time to the database.
         protected String doInBackground(Void... params) {
              Queries.ChangeStatusQuery(MainActivity.username, batteryPercent, lastSeen );
             return "Complete";

@@ -26,11 +26,15 @@ public class phoneAdaptor extends androidx.recyclerview.widget.RecyclerView.Adap
         return new ViewHolder(v);
     }
 
+
+    // Set what the elements to be displayed on the recycler does after we create them.
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
     ViewHolder vh = (ViewHolder) holder;
     GroupCall call = calls.get(position);
     vh.name.setText(call.getName());
+    // Set the button's tag to the phone number. We can access this tag later when we need to
+    // set the number the button is supposed to call
     vh.button.setTag(call.getPhoneNumber());
     }
 
