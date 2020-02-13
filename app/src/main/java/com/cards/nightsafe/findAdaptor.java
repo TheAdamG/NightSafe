@@ -37,14 +37,15 @@ public class findAdaptor extends androidx.recyclerview.widget.RecyclerView.Adapt
     }
 
     private static String getLastSeen(String time) throws ParseException {
-        Log.v("TIMEERROR", time);
         DateFormat sdf = new SimpleDateFormat("hh:mm");
         Date seenTime = sdf.parse(time);
         Calendar cal = Calendar.getInstance();
         Date currentTime = sdf.parse(sdf.format(cal.getTime()));
-        Log.v("TIMEERROR", String.valueOf(Math.abs(seenTime.getTime() - currentTime.getTime())/1000/60));
         return String.valueOf(Math.abs(seenTime.getTime() - currentTime.getTime())/1000/60);
     }
+
+    // Sets up the linear layout with each button to have the current position as well as
+    // sets the image to the user's correct battery percentage
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
