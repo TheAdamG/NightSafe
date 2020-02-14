@@ -1,8 +1,6 @@
 package com.cards.nightsafe;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.uber.sdk.android.rides.RideParameters;
 import com.uber.sdk.android.rides.RideRequestButton;
@@ -35,12 +33,15 @@ public class goHome extends AppCompatActivity {
 
 
     public void launchMap(View v) {
+        // When the normal button is pressed, it's press behaviour gets set here.
         String mapUrl = (String) v.getTag();
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(mapUrl));
         startActivity(intent);
 
     }
     private void generateButton(double[] ordinates) {
+
+        // Creates the Uber button - required in this way.
 
         SessionConfiguration config = new SessionConfiguration.Builder()
                 // mandatory
@@ -100,14 +101,14 @@ public class goHome extends AppCompatActivity {
         }
 
         protected String doInBackground(Void... params) {
+            // This query will get the destination that the group is going to
             destinations = Queries.GroupDestinationQuery(10);
             String destination = destinations.getDestination();
             String origin = destinations.getEventLocation();
-            Log.v("Destination", destination);
-            Log.v("Origin", origin);
             DirectionRequest directionRequest;
             DirectionRequest uberRequest;
             try {
+                // Attempt to make a new direction request which we can use for google transit or uber
                 directionRequest = new DirectionRequest(origin, destination, false);
                 Log.v("directionRequest", directionRequest.getMode());
 
@@ -126,6 +127,7 @@ public class goHome extends AppCompatActivity {
         }
 
         protected void onPostExecute(String result) {
+            // One the query is complete, we update the uber buttons and transit buttons with the required info
             if (result.equals("Complete")) {
                 Button transportButton = findViewById(R.id.transport_button);
                 TextView transitDuration = findViewById(R.id.transit_duration);
