@@ -1,15 +1,5 @@
 package com.cards.nightsafe;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.uber.sdk.android.rides.RideParameters;
-import com.uber.sdk.android.rides.RideRequestButton;
-import com.uber.sdk.android.rides.RideRequestButtonCallback;
-import com.uber.sdk.rides.client.ServerTokenSession;
-import com.uber.sdk.rides.client.SessionConfiguration;
-import com.uber.sdk.rides.client.error.ApiError;
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,6 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.uber.sdk.android.rides.RideParameters;
+import com.uber.sdk.android.rides.RideRequestButton;
+import com.uber.sdk.android.rides.RideRequestButtonCallback;
+import com.uber.sdk.rides.client.ServerTokenSession;
+import com.uber.sdk.rides.client.SessionConfiguration;
+import com.uber.sdk.rides.client.error.ApiError;
 
 import java.io.IOException;
 
@@ -39,6 +38,7 @@ public class goHome extends AppCompatActivity {
         startActivity(intent);
 
     }
+
     private void generateButton(double[] ordinates) {
 
         // Creates the Uber button - required in this way.
@@ -78,8 +78,6 @@ public class goHome extends AppCompatActivity {
         requestButton.setCallback(callback);
         requestButton.loadRideInformation();
     }
-
-
 
 
     private class Download extends AsyncTask<Void, Void, String> {
@@ -142,8 +140,6 @@ public class goHome extends AppCompatActivity {
         }
 
     }
-
-
 
 
 }

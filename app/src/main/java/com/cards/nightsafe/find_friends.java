@@ -1,18 +1,11 @@
 package com.cards.nightsafe;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Bundle;
-
-import java.util.ArrayList;
-
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,8 +13,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -42,6 +38,7 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,37 +46,29 @@ import java.util.List;
 public class find_friends extends AppCompatActivity
         implements OnMapReadyCallback {
 
-    private RecyclerView.Adapter adapter;
-    ArrayList<GroupFind> groupList;
-
     private static final String TAG = find_friends.class.getSimpleName();
-    private GoogleMap mMap;
-    private CameraPosition mCameraPosition;
-
-
-    // The entry point to the Places API.
-    private PlacesClient mPlacesClient;
-
-    // The entry point to the Fused Location Provider.
-    private FusedLocationProviderClient mFusedLocationProviderClient;
-
-    // A default location (Sydney, Australia) and default zoom to use when location permission is
-    // not granted.
-    private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private boolean mLocationPermissionGranted;
-
-    // The geographical location where the device is currently located. That is, the last-known
-    // location retrieved by the Fused Location Provider.
-    private Location mLastKnownLocation;
-
     // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
-
     // Used for selecting the current place.
     private static final int M_MAX_ENTRIES = 5;
+    // A default location (Sydney, Australia) and default zoom to use when location permission is
+    // not granted.
+    private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
+    ArrayList<GroupFind> groupList;
+    private RecyclerView.Adapter adapter;
+    private GoogleMap mMap;
+    private CameraPosition mCameraPosition;
+    // The entry point to the Places API.
+    private PlacesClient mPlacesClient;
+    // The entry point to the Fused Location Provider.
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private boolean mLocationPermissionGranted;
+    // The geographical location where the device is currently located. That is, the last-known
+    // location retrieved by the Fused Location Provider.
+    private Location mLastKnownLocation;
     private String[] mLikelyPlaceNames;
     private String[] mLikelyPlaceAddresses;
     private List[] mLikelyPlaceAttributions;
@@ -110,7 +99,6 @@ public class find_friends extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
 
         showCurrentPlace();
@@ -147,7 +135,6 @@ public class find_friends extends AppCompatActivity
      * @param item The menu item to handle.
      * @return Boolean.
      */
-
 
 
     /**
@@ -434,8 +421,6 @@ public class find_friends extends AppCompatActivity
     }
 
 
-
-
     private class Download extends AsyncTask<Void, Void, String> {
 
         Context context;
@@ -457,7 +442,7 @@ public class find_friends extends AppCompatActivity
         // Once the query is complete, the recycler is updated to display the recylcer view.
         protected void onPostExecute(String result) {
             if (result.equals("Complete")) {
-                this.calls = (RecyclerView) findViewById(R.id.findRecycler);
+                this.calls = findViewById(R.id.findRecycler);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
                 this.calls.setLayoutManager(mLayoutManager);
 

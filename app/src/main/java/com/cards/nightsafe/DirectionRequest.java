@@ -1,25 +1,28 @@
 package com.cards.nightsafe;
+
 import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.*;
-import java.lang.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DirectionRequest {
-    private JSONObject jObject;
     private static final String DEFAULT_URL = "https://maps.googleapis.com/maps/api/directions/json?";
-    private String url = "&transit_routing_preference=fewer_transfers";
     private static final String KEY = "&key=AIzaSyCcoALVP0D-QDqaPu46Cx1-fMB5qy_CD0c";
     private final String origin;
     private final String destination;
+    private JSONObject jObject;
+    private String url = "&transit_routing_preference=fewer_transfers";
 
     public DirectionRequest(
             int originLat, int originLong, int destLat, int destLong, String departure, boolean drive)
@@ -51,41 +54,22 @@ public class DirectionRequest {
         getGoogleJSON();
     }
 
-    /* Will NEED this for launching google maps. Append the result of this to the URL query for launching google maps
-    with the route. It specifies all of the parameters.
-     */
-    public String getURL() {
-        return url;
-    }
-
-    /* Returns the list containing longitudes and latitudes for the origin and destination. You need these to launch UBER.
-     */
-    public double[] getUberPickup() throws IOException {
-        ArrayList<Double> output = DirectionRequest.toLongLat(origin);
-        output.addAll(DirectionRequest.toLongLat(destination));
-        double[] doubleArray = new double[output.size()];
-        for (int i = 0; i < output.size(); i++) {
-            doubleArray[i] = Double.valueOf(output.get(i));
-        }
-        return doubleArray;
-    }
-
     private static ArrayList<Double> toLongLat(String location) throws IOException {
         ArrayList<Double> output = new ArrayList<>();
         try {
-        JSONObject longLat =
-                DirectionRequest.getJSON(
-                        "https://maps.googleapis.com/maps/api/geocode/json?address="
-                                + location
-                                + DirectionRequest.KEY)
-                        .getJSONArray("results")
-                        .getJSONObject(0)
-                        .getJSONObject("geometry")
-                        .getJSONObject("location");
+            JSONObject longLat =
+                    DirectionRequest.getJSON(
+                            "https://maps.googleapis.com/maps/api/geocode/json?address="
+                                    + location
+                                    + DirectionRequest.KEY)
+                            .getJSONArray("results")
+                            .getJSONObject(0)
+                            .getJSONObject("geometry")
+                            .getJSONObject("location");
 
-        output.add(longLat.getDouble("lat"));
-        output.add(longLat.getDouble("lng"));
-         } catch (JSONException e) {
+            output.add(longLat.getDouble("lat"));
+            output.add(longLat.getDouble("lng"));
+        } catch (JSONException e) {
             Log.v("Json Exeception", e.getMessage());
         }
         return output;
@@ -116,13 +100,50 @@ public class DirectionRequest {
         return parsed.toString();
     }
 
+    private static JSONObject getJSON(String address) throws IOException {
+        Log.v("address", address);
+        URL obj = new URL(address);
+        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        try {
+            return new JSONObject(response.toString());
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+
+    /* Will NEED this for launching google maps. Append the result of this to the URL query for launching google maps
+    with the route. It specifies all of the parameters.
+     */
+    public String getURL() {
+        return url;
+    }
+
+    /* Returns the list containing longitudes and latitudes for the origin and destination. You need these to launch UBER.
+     */
+    public double[] getUberPickup() throws IOException {
+        ArrayList<Double> output = DirectionRequest.toLongLat(origin);
+        output.addAll(DirectionRequest.toLongLat(destination));
+        double[] doubleArray = new double[output.size()];
+        for (int i = 0; i < output.size(); i++) {
+            doubleArray[i] = Double.valueOf(output.get(i));
+        }
+        return doubleArray;
+    }
+
     /* Provides the length of a journey via google maps (walking or transit). Will need to show this where user decides.
      *
      * I can possibly upgrade this later so that the time if you drive is used as a time estimate for selecting an UBER. */
     public String getDuration() {
         String s = "";
         try {
-            s =  jObject.getJSONObject("duration").getString("text");
+            s = jObject.getJSONObject("duration").getString("text");
         } catch (JSONException e) {
             Log.v("Json Exeception", e.getMessage());
         }
@@ -149,33 +170,15 @@ public class DirectionRequest {
         return TextUtils.join(", ", descriptions);
     }
 
-    private static JSONObject getJSON(String address) throws IOException {
-        Log.v("address", address);
-        URL obj = new URL(address);
-        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String inputLine;
-        StringBuilder response = new StringBuilder();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-        try {
-        return new JSONObject(response.toString());
-        } catch (JSONException e) {
-            return null;
-        }
-    }
-
     private void getGoogleJSON() throws IOException {
         try {
-        jObject =
-                DirectionRequest.getJSON(DEFAULT_URL + url)
-                        .getJSONArray("routes")
-                        .getJSONObject(0)
-                        .getJSONArray("legs")
-                        .getJSONObject(0); }
-        catch (JSONException e) {
+            jObject =
+                    DirectionRequest.getJSON(DEFAULT_URL + url)
+                            .getJSONArray("routes")
+                            .getJSONObject(0)
+                            .getJSONArray("legs")
+                            .getJSONObject(0);
+        } catch (JSONException e) {
             Log.v("Json Exeception", e.getMessage());
         }
     }

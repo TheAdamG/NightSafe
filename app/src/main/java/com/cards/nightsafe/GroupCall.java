@@ -23,19 +23,19 @@ public class GroupCall {
 
     @Override
     public String toString() {
-        return (name+" "+ phoneNumber);
+        return (name + " " + phoneNumber);
     }
 
     public String getName() {
         return name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {

@@ -13,13 +13,21 @@ public class EventInfo {
         this.date = date;
     }
 
-    public String getName () {return name;}
-    public String getLocation () {return location;}
-    public String getDate () {return date;}
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDate() {
+        return date;
+    }
 
     @Override
     public String toString() {
-        return (name +" "+ location +" "+ date);
+        return (name + " " + location + " " + date);
     }
 
 }

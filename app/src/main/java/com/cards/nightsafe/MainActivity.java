@@ -1,6 +1,5 @@
 package com.cards.nightsafe;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,6 +9,8 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,11 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the help button to be held down
         findViewById(R.id.help_button).setOnLongClickListener(new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v) {
-            launchEmergency(v);
-            return true;
-        }});
+            @Override
+            public boolean onLongClick(View v) {
+                launchEmergency(v);
+                return true;
+            }
+        });
 
 
         // Send the time and battery percentage to the database
@@ -47,14 +49,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    void getBattery_percentage()
-    {
+    void getBattery_percentage() {
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
         int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-        float batteryPct = level / (float)scale;
+        float batteryPct = level / (float) scale;
         float p = batteryPct * 100;
 
         batteryPercent = Math.round(p);
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Calls the query to upload battery percentage and the last seen time to the database.
         protected String doInBackground(Void... params) {
-             Queries.ChangeStatusQuery(MainActivity.username, batteryPercent, lastSeen );
+            Queries.ChangeStatusQuery(MainActivity.username, batteryPercent, lastSeen);
             return "Complete";
         }
 
@@ -106,10 +106,8 @@ public class MainActivity extends AppCompatActivity {
             if (result.equals("Complete")) {
 
             }
-            }
         }
-
-
-
-
     }
+
+
+}

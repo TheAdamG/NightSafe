@@ -1,7 +1,6 @@
 package com.cards.nightsafe;
 
 
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,15 +25,8 @@ public class findAdaptor extends androidx.recyclerview.widget.RecyclerView.Adapt
 
     private ArrayList<GroupFind> groupMembers;
 
-    public findAdaptor(ArrayList<GroupFind> groupMembers ) {
+    public findAdaptor(ArrayList<GroupFind> groupMembers) {
         this.groupMembers = groupMembers;
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.friend_table, parent, false);
-        return new ViewHolder(v);
     }
 
     private static String getLastSeen(String time) throws ParseException {
@@ -41,7 +34,14 @@ public class findAdaptor extends androidx.recyclerview.widget.RecyclerView.Adapt
         Date seenTime = sdf.parse(time);
         Calendar cal = Calendar.getInstance();
         Date currentTime = sdf.parse(sdf.format(cal.getTime()));
-        return String.valueOf(Math.abs(seenTime.getTime() - currentTime.getTime())/1000/60);
+        return String.valueOf(Math.abs(seenTime.getTime() - currentTime.getTime()) / 1000 / 60);
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.friend_table, parent, false);
+        return new ViewHolder(v);
     }
 
     // Sets up the linear layout with each button to have the current position as well as
@@ -54,19 +54,17 @@ public class findAdaptor extends androidx.recyclerview.widget.RecyclerView.Adapt
         vh.findName.setText(group.getName());
         Log.v("lastSeenTime", group.getLastSeenTime());
 
-        try{
-            String s = "Last seen: " +  getLastSeen(group.getLastSeenTime()) + " mins ago";
-        vh.findLastSeen.setText(s); }
-        catch (ParseException e) {
+        try {
+            String s = "Last seen: " + getLastSeen(group.getLastSeenTime()) + " mins ago";
+            vh.findLastSeen.setText(s);
+        } catch (ParseException e) {
         }
 
         if (group.getBatteryPercentage() < 25) {
             vh.batteryImage.setImageResource(R.drawable.zero);
-        }
-        else if (group.getBatteryPercentage() < 50) {
+        } else if (group.getBatteryPercentage() < 50) {
             vh.batteryImage.setImageResource(R.drawable.fifty);
-        }
-        else if (group.getBatteryPercentage() < 75) {
+        } else if (group.getBatteryPercentage() < 75) {
             vh.batteryImage.setImageResource(R.drawable.seventy);
         } else {
             vh.batteryImage.setImageResource(R.drawable.hundred);
