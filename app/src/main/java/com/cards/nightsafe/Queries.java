@@ -28,6 +28,7 @@ public class Queries {
     }
 
     public static EmergencyContacts EmergencyContactsQuery(int username) {
+        // TODO implement emergency contacts
         try {
             Class.forName(myDriver);
             Connection conn = DriverManager.getConnection(myUrl, "root", "imperial");
@@ -81,6 +82,7 @@ public class Queries {
     }
 
     public static ArrayList<String> FriendNamesQuery(int username) {
+        // TODO remove streams
         ArrayList<String> friends = new ArrayList<>();
         try {
             Class.forName(myDriver);

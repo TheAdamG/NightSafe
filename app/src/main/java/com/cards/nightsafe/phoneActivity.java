@@ -19,6 +19,8 @@ public class phoneActivity extends AppCompatActivity {
     ArrayList<GroupCall> callsList;
     private RecyclerView.Adapter adapter;
 
+    //TODO add emergency contacts recycler
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

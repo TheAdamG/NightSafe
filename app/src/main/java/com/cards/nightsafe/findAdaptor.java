@@ -70,6 +70,8 @@ public class findAdaptor extends androidx.recyclerview.widget.RecyclerView.Adapt
             vh.batteryImage.setImageResource(R.drawable.hundred);
         }
 
+        // Attach the latLng to the friend button we created. This will need to be cast back to latlng in the call
+
         LatLng latLng = new LatLng(group.getLatitude(), group.getLongitude());
         vh.friendButton.setTag(latLng);
 
@@ -87,6 +89,8 @@ public class findAdaptor extends androidx.recyclerview.widget.RecyclerView.Adapt
     }
 
     public static class ViewHolder extends androidx.recyclerview.widget.RecyclerView.ViewHolder {
+        // The find friends adaptor has the persons name, the time they were last seen, the image
+        // of their battery level and the linear layout as a button that can be pressed to track them
         public final View view;
         public final TextView findName;
         public final TextView findLastSeen;
