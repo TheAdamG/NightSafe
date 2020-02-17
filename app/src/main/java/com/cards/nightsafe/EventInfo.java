@@ -17,13 +17,6 @@ public class EventInfo {
         return name;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public String getDate() {
-        return date;
-    }
 
     @Override
     public String toString() {

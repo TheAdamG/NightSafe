@@ -18,17 +18,11 @@ public class GroupDestination {
         return destination;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
     public String getEventLocation() {
         return eventLocation;
     }
 
-    public void setEventLocation(String eventLocation) {
-        this.eventLocation = eventLocation;
-    }
+
 
 
 }
