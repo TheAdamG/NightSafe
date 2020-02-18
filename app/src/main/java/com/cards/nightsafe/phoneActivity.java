@@ -25,16 +25,10 @@ public class phoneActivity extends AppCompatActivity {
         setContentView(R.layout.activity_phone);
 
         new Download(phoneActivity.this).execute();
-        //ArrayList<GroupCall> calls = GroupCall.makeGroupCall();
-
-
-
-
+        
     }
 
-
-
-    public void testCall (View view) {
+    public void makeCall (View view) {
         String phoneNumber = (String) view.getTag();
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
         callIntent.setData(Uri.parse("tel:" + phoneNumber));

@@ -49,6 +49,7 @@ public class phoneAdaptor extends androidx.recyclerview.widget.RecyclerView.Adap
     }
 
     public static class ViewHolder extends androidx.recyclerview.widget.RecyclerView.ViewHolder {
+        // The view holder for calling involves a text view for a persons name and a button to make the call
         public final View view;
         public final TextView name;
         public final Button button;
